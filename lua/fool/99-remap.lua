@@ -23,15 +23,15 @@ vim.keymap.set('n', 'j', function()
   end
 end, { silent = true })
 -- better p
--- p and P only paste from yank register, not from delete register
-vim.keymap.set('n', 'p', '"0p', { remap = false })
-vim.keymap.set('n', 'P', '"0P', { remap = false })
+-- p and P only paste from system clipboard register, not from default register
+vim.keymap.set('n', 'p', '"*p', { remap = false })
+vim.keymap.set('n', 'P', '"*P', { remap = false })
 
 -- Normal mode
-vim.keymap.set('n', 'dx', '"0dd', { remap = false }) -- delete line + copy it
+vim.keymap.set('n', 'dx', '"*dd', { remap = false }) -- delete line + copy it
 
 -- Visual mode
-vim.keymap.set('x', 'x', '"0d', { remap = false }) -- delete selection + copy it
+vim.keymap.set('x', 'x', '"*d', { remap = false }) -- delete selection + copy it
 
 -- ============================================================================
 -- Better movement

@@ -55,18 +55,6 @@ vim.opt.guicursor = table.concat({
   'sm:block-blinkwait175-blinkoff150-blinkon175',
 }, ',')
 
-vim.api.nvim_set_hl(0, 'Cursor', {
-  fg = '#000000',
-  bg = '#f5e0dc',
-  blend = 0,
-})
-
-vim.api.nvim_set_hl(0, 'lCursor', {
-  fg = '#000000',
-  bg = '#f5e0dc',
-  blend = 0,
-})
-
 vim.opt.foldmethod = 'expr'
 vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.foldlevel = 90
@@ -87,3 +75,5 @@ vim.opt.isfname:append '@-@'
 -- Always write exactly one newline at EOF
 vim.opt.endofline = true
 vim.opt.fixendofline = true
+
+vim.schedule(function() vim.o.clipboard = '' end)
