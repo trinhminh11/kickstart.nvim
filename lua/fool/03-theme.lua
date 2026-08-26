@@ -32,6 +32,10 @@ require('classic_monokai').setup {
     hl['@lsp.typemod.class.defaultLibrary'] = '@type.builtin'
 
     hl.DiagnosticUnnecessary = { fg = '#75715E' }
+
+    hl.Search = {
+      bg = '#505c78',
+    }
   end,
 }
 
@@ -73,25 +77,37 @@ vim.api.nvim_set_hl(0, 'NvimTreeGitDeletedIcon', {
   fg = '#f7768e',
 })
 
-local function set_transparent() -- set UI component to transparent
-  local groups = {
-    'Normal',
-    'NormalNC',
-    'EndOfBuffer',
-    'NormalFloat',
-    'FloatBorder',
-    'SignColumn',
-    'StatusLine',
-    'StatusLineNC',
-    'TabLine',
-    'TabLineFill',
-    'TabLineSel',
-    'ColorColumn',
-  }
-  for _, g in ipairs(groups) do
-    vim.api.nvim_set_hl(0, g, { bg = 'none' })
-  end
-  vim.api.nvim_set_hl(0, 'TabLineFill', { bg = 'none', fg = '#767676' })
-end
+vim.api.nvim_set_hl(0, 'Cursor', {
+  fg = '#000000',
+  bg = '#f5e0dc',
+  blend = 0,
+})
 
-set_transparent()
+vim.api.nvim_set_hl(0, 'lCursor', {
+  fg = '#000000',
+  bg = '#f5e0dc',
+  blend = 0,
+})
+
+-- local function set_transparent() -- set UI component to transparent
+--   local groups = {
+--     'Normal',
+--     'NormalNC',
+--     'EndOfBuffer',
+--     'NormalFloat',
+--     'FloatBorder',
+--     'SignColumn',
+--     'StatusLine',
+--     'StatusLineNC',
+--     'TabLine',
+--     'TabLineFill',
+--     'TabLineSel',
+--     'ColorColumn',
+--   }
+--   for _, g in ipairs(groups) do
+--     vim.api.nvim_set_hl(0, g, { bg = 'none' })
+--   end
+--   vim.api.nvim_set_hl(0, 'TabLineFill', { bg = 'none', fg = '#767676' })
+-- end
+--
+-- set_transparent()
