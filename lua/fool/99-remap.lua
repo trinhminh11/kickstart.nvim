@@ -333,17 +333,28 @@ vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format {
 
 -- Trouble Keymap
 
-local a = 3
-
 do
   local trouble = require 'trouble'
-  ---@diagnostic disable-next-line: missing-fields
-  vim.keymap.set('n', '<leader>dd', function() trouble.toggle { mode = 'open_buffers' } end, { desc = 'Toggle [D]iagnostics' })
+  vim.keymap.set(
+    'n',
+    '<leader>dd',
+    ---@diagnostic disable-next-line: missing-fields
+    function() trouble.toggle { mode = 'open_buffers', win = { relative = 'win', position = 'left' } } end,
+    { desc = 'Toggle [D]iagnostics' }
+  )
+
+  vim.keymap.set(
+    'n',
+    '<leader>ds',
+    ---@diagnostic disable-next-line: missing-fields
+    function() trouble.toggle { mode = 'symbols', win = { relative = 'win', position = 'left' } } end,
+    { desc = 'Toggle [D]iagnostics' }
+  )
+
   ---@diagnostic disable-next-line: missing-parameter, missing-fields
-  vim.keymap.set('n', '<leader>dn', function() trouble.next { mode = 'diagnostics' } end, { desc = '[D]iagnostic [N]ext' })
+  vim.keymap.set('n', '<leader>dn', function() trouble.next { mode = 'open_buffers' } end, { desc = '[D]iagnostic [N]ext' })
   ---@diagnostic disable-next-line: missing-parameter, missing-fields
-  vim.keymap.set('n', '<leader>dp', function() trouble.prev { mode = 'diagnostics' } end, { desc = '[D]iagnostic [P]revious' })
-  -- vim.keymap.set('n', '<leader>dp', '<cmd>Trouble previous<CR>', { desc = 'Previous [D]iagnostic' })
+  vim.keymap.set('n', '<leader>dp', function() trouble.prev { mode = 'open_buffers' } end, { desc = '[D]iagnostic [P]revious' })
 end
 -- ============================================================================
 -- Git Keymaps
