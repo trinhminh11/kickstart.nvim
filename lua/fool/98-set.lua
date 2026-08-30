@@ -1,3 +1,8 @@
+vim.g.have_nerd_fonts = true
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.wrap = false
@@ -47,12 +52,12 @@ vim.opt.modifiable = true
 vim.opt.encoding = 'UTF-8'
 
 vim.opt.guicursor = table.concat({
-  'n-v-c:block',
-  'i-ci-ve:ver25',
-  'r-cr:hor20',
-  'o:hor50',
-  'a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor',
-  'sm:block-blinkwait175-blinkoff150-blinkon175',
+  'n-v-c:block', -- Normal, Visual, Command mode -> block cursor
+  'i-ci-ve:ver25', -- Insert, Command-line Insert, Visual-Select mode -> vertical bar cursor
+  'r-cr:hor20', -- Replace, Command-line Replace mode -> horizontal bar cursor
+  'o:hor50', -- Operator-pending mode -> horizontal bar cursor
+  'a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor', -- All modes -> blinking cursor
+  'sm:block-blinkwait175-blinkoff150-blinkon175', -- Showmatch mode -> blinking block cursor
 }, ',')
 
 vim.opt.foldmethod = 'expr'
