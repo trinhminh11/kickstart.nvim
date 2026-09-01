@@ -1,4 +1,4 @@
-vim.pack.add {
+vim.pack.add({
   'https://github.com/nvim-tree/nvim-web-devicons', -- file icons
   'https://github.com/akinsho/bufferline.nvim', -- for buffer line
   'https://github.com/nvim-tree/nvim-tree.lua', -- file explorer
@@ -10,7 +10,7 @@ vim.pack.add {
   'https://github.com/mrjones2014/smart-splits.nvim', -- smart splits to split between tmux and nvim
   'https://github.com/laytan/cloak.nvim', -- cloak to hide sensitive information
   'https://github.com/folke/trouble.nvim', -- quickfix list replacement
-}
+})
 
 -- ============================================================================
 -- Basic setup
@@ -19,9 +19,9 @@ vim.pack.add {
 -- Cloak:
 -- Plugin that allows you to hide sensitive information in your code, such as API keys or passwords
 -- by replacing them with a placeholder. This can be useful when sharing your code with others or when working in a public repository.
-require('cloak').setup {}
+require('cloak').setup({})
 
-require('trouble').setup {
+require('trouble').setup({
   modes = {
     open_buffers = {
       mode = 'diagnostics',
@@ -30,7 +30,7 @@ require('trouble').setup {
       end,
     },
   },
-}
+})
 
 -- VimTeX
 do
@@ -39,32 +39,32 @@ do
 end
 
 -- Mini nvim
-require('mini.comment').setup {}
-require('mini.move').setup {}
-require('mini.cursorword').setup {}
-require('mini.indentscope').setup {}
-require('mini.pairs').setup {}
-require('mini.trailspace').setup {}
-require('mini.bufremove').setup {}
-require('mini.icons').setup {}
+require('mini.comment').setup({})
+require('mini.move').setup({})
+require('mini.cursorword').setup({})
+require('mini.indentscope').setup({})
+require('mini.pairs').setup({})
+require('mini.trailspace').setup({})
+require('mini.bufremove').setup({})
+require('mini.icons').setup({})
 
 -- Treesitter Textobjects
 -- configuration
-require('nvim-treesitter-textobjects').setup {
+require('nvim-treesitter-textobjects').setup({
   move = {
     -- whether to set jumps in the jumplist
     set_jumps = true,
   },
-}
+})
 
 -- ============================================================================
 -- File Explorer
 -- ============================================================================
 
 -- NvimTree
-require('nvim-tree').setup {
+require('nvim-tree').setup({
   on_attach = function(bufnr)
-    local api = require 'nvim-tree.api'
+    local api = require('nvim-tree.api')
 
     local function opts(desc) return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true } end
 
@@ -75,7 +75,7 @@ require('nvim-tree').setup {
     vim.keymap.del('n', '<C-]>', { buffer = bufnr })
 
     -- Map Shift+Enter to change the directory to the node under the cursor
-    vim.keymap.set('n', '<S-CR>', api.tree.change_root_to_node, opts 'CD')
+    vim.keymap.set('n', '<S-CR>', api.tree.change_root_to_node, opts('CD'))
   end,
   view = {
     side = 'right',
@@ -118,20 +118,20 @@ require('nvim-tree').setup {
       },
     },
   },
-}
+})
 
 -- ============================================================================
 -- Linters, Formatters, and LSP
 -- ============================================================================
 
-require('bufferline').setup {
+require('bufferline').setup({
   options = {
     mode = 'buffers',
     diagnostics = 'nvim_lsp',
     separator_style = 'thin',
     always_show_bufferline = false,
   },
-}
+})
 
 do
   local servers = {
@@ -186,7 +186,7 @@ do
     -- You can add other tools here that you want Mason to install
   })
 
-  require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+  require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
   for name, server in pairs(servers) do
     vim.lsp.config(name, server)
@@ -196,7 +196,7 @@ end
 
 do
   -- [[ Formatting ]]
-  require('conform').setup {
+  require('conform').setup({
     notify_on_error = false,
     format_on_save = function(bufnr)
       -- You can specify filetypes to autoformat on save here:
@@ -225,6 +225,8 @@ do
           'Spaces',
           '--indent-width',
           '2',
+          '--call-parentheses',
+          'Always',
         },
       },
     },
@@ -239,7 +241,7 @@ do
       -- You can use 'stop_after_first' to run the first available formatter from the list
       -- javascript = { "prettierd", "prettier", stop_after_first = true },
     },
-  }
+  })
 end
 
 -- ============================================================================
@@ -248,7 +250,7 @@ end
 
 -- UndoTree
 do
-  require('undotree').setup {
+  require('undotree').setup({
     float_diff = true, -- set this `true` will disable layout option
     --- @type "left_bottom" | "left_left_bottom"
     layout = 'left_bottom', -- {left}_{bottom} {left}_{left_bottom}
@@ -275,7 +277,7 @@ do
       quit = 'q', -- is defined for both undotree and preview buffers
       update_undotree_view = 'S',
     },
-  }
+  })
 end
 
 -- ============================================================================
@@ -283,7 +285,7 @@ end
 -- ============================================================================
 
 -- Lualine (Statusline)
-require('lualine').setup {
+require('lualine').setup({
   options = {
     -- theme = "melange", -- melange-nvim ships a dedicated lualine theme
     icons_enabled = true,
@@ -297,7 +299,7 @@ require('lualine').setup {
     lualine_c = { { 'filename', path = 0 } },
     lualine_x = {
       function()
-        local size = vim.fn.getfsize(vim.fn.expand '%')
+        local size = vim.fn.getfsize(vim.fn.expand('%'))
         if size < 0 then
           return ''
         elseif size < 1024 then
@@ -317,14 +319,14 @@ require('lualine').setup {
     lualine_c = { { 'filename', path = 0 } },
     lualine_x = { 'filetype' },
   },
-}
+})
 
 -- ============================================================================
 -- FILETYPE SPECIFIC CONFIGS
 -- ============================================================================
 
 -- Markdown
-require('render-markdown').setup {
+require('render-markdown').setup({
   completions = { lsp = { enabled = true } },
   heading = {
     icons = { '' },
@@ -333,4 +335,4 @@ require('render-markdown').setup {
   width = 'block',
   left_pad = 1,
   right_pad = 1,
-}
+})

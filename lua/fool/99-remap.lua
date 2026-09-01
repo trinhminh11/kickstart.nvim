@@ -2,7 +2,7 @@ vim.keymap.set({ 'n', 'v' }, '<leader>pv', vim.cmd.Ex)
 vim.keymap.set('n', 'C-c', '<cmd>nohlsearch<CR>', { desc = 'Clear search highlight' })
 
 vim.keymap.set('n', '<leader>cd', function()
-  local dir = vim.fn.expand '%:p:h'
+  local dir = vim.fn.expand('%:p:h')
 
   vim.cmd.cd(dir)
   require('nvim-tree.api').tree.change_root(dir)
@@ -20,14 +20,14 @@ do
   -- Press j on the last line to move onto a new editable line
   vim.keymap.set('n', 'j', function()
     local count = vim.v.count1
-    local line = vim.fn.line '.'
-    local last = vim.fn.line '$'
+    local line = vim.fn.line('.')
+    local last = vim.fn.line('$')
 
     local editable = vim.bo.modifiable and not vim.bo.readonly and vim.bo.buftype == ''
 
     if line == last and count == 1 and editable then
-      vim.cmd 'normal! o'
-      vim.cmd 'stopinsert'
+      vim.cmd('normal! o')
+      vim.cmd('stopinsert')
     else
       vim.cmd('normal! ' .. count .. 'j')
     end
@@ -197,7 +197,7 @@ do
     function() require('nvim-treesitter-textobjects.move').goto_previous_start('@conditional.outer', 'textobjects') end,
     { desc = 'Previous conditional start' }
   )
-  local ts_repeat_move = require 'nvim-treesitter-textobjects.repeatable_move'
+  local ts_repeat_move = require('nvim-treesitter-textobjects.repeatable_move')
 
   -- Repeat movement with ; and ,
   -- ensure ; goes forward and , goes backward regardless of the last direction
@@ -216,18 +216,18 @@ do
 end
 
 vim.keymap.set('n', '<leader>j', function()
-  local ok = pcall(function() vim.cmd 'lnext' end)
+  local ok = pcall(function() vim.cmd('lnext') end)
   if not ok then
-    local ok2 = pcall(function() vim.cmd 'lfirst' end)
+    local ok2 = pcall(function() vim.cmd('lfirst') end)
     if not ok2 then vim.notify('No more jumps', vim.log.levels.INFO) end
   end
-  vim.cmd 'normal! zz'
+  vim.cmd('normal! zz')
 end, { desc = 'Next [j]ump' })
 
 vim.keymap.set('n', '<leader>k', function()
-  local ok = pcall(function() vim.cmd 'lprev' end)
+  local ok = pcall(function() vim.cmd('lprev') end)
   if not ok then
-    local ok2 = pcall(function() vim.cmd 'llast' end)
+    local ok2 = pcall(function() vim.cmd('llast') end)
     if not ok2 then vim.notify('No more jumps', vim.log.levels.INFO) end
   end
 end, { desc = 'Previous [k]ump' })
@@ -245,16 +245,16 @@ vim.keymap.set('n', '<leader>E', '<cmd>NvimTreeToggle<CR>', {
 -- Focus tree
 vim.keymap.set('n', '<leader>e', function()
   if vim.bo.filetype == 'NvimTree' then
-    vim.cmd 'wincmd p'
+    vim.cmd('wincmd p')
   else
-    vim.cmd 'NvimTreeFocus'
+    vim.cmd('NvimTreeFocus')
   end
 end, {
   desc = 'Toggle focus file [e]xplorer',
 })
 
 do
-  local smart_splits = require 'smart-splits'
+  local smart_splits = require('smart-splits')
 
   vim.keymap.set('n', '<C-h>', smart_splits.move_cursor_left)
   vim.keymap.set('n', '<C-j>', smart_splits.move_cursor_down)
@@ -268,21 +268,21 @@ do
 end
 
 -- Bufferline Next/Prev
-vim.keymap.set('n', '<TAB>', function() vim.cmd 'BufferLineCycleNext' end, {
+vim.keymap.set('n', '<TAB>', function() vim.cmd('BufferLineCycleNext') end, {
   desc = 'Next buffer/terminal',
 })
 
-vim.keymap.set('n', '<S-TAB>', function() vim.cmd 'BufferLineCyclePrev' end, {
+vim.keymap.set('n', '<S-TAB>', function() vim.cmd('BufferLineCyclePrev') end, {
   desc = 'Previous buffer/terminal',
 })
 
 vim.keymap.set('n', '<C-w>', function()
   local current = vim.api.nvim_get_current_buf()
 
-  vim.cmd 'BufferLineMovePrev'
+  vim.cmd('BufferLineMovePrev')
 
   -- if new_current is current -> vim.cmd 'BufferLineCycleNext' to move to next buffer
-  if vim.api.nvim_get_current_buf() == current then vim.cmd 'BufferLineCycleNext' end
+  if vim.api.nvim_get_current_buf() == current then vim.cmd('BufferLineCycleNext') end
 
   if vim.api.nvim_get_current_buf() ~= current then
     vim.api.nvim_buf_delete(current, {})
@@ -315,7 +315,7 @@ vim.keymap.set({ 'n', 'v' }, '<leader>wh', ':split<CR>', { desc = 'Split [W]indo
 -- ============================================================================
 
 do
-  local session = require 'fool.04-session'
+  local session = require('fool.04-session')
   vim.keymap.set('n', '<leader>ss', session.save_session, { desc = 'Create session' })
 
   vim.keymap.set('n', '<leader>sl', session.load_session, { desc = 'Load session' })
@@ -329,17 +329,17 @@ end
 vim.keymap.set('n', '<leader>u', require('undotree').toggle, { noremap = true, silent = true, desc = 'Toggle [U]ndoTree' })
 
 -- Conform Keymap
-vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format { async = true } end, { desc = '[F]ormat buffer' })
+vim.keymap.set({ 'n', 'v' }, '<leader>f', function() require('conform').format({ async = true }) end, { desc = '[F]ormat buffer' })
 
 -- Trouble Keymap
-
 do
-  local trouble = require 'trouble'
+  local trouble = require('trouble')
+
   vim.keymap.set(
     'n',
     '<leader>dd',
     ---@diagnostic disable-next-line: missing-fields
-    function() trouble.toggle { mode = 'open_buffers', win = { relative = 'win', position = 'left' } } end,
+    function() trouble.toggle({ mode = 'open_buffers', win = { relative = 'win', position = 'left' } }) end,
     { desc = 'Toggle [D]iagnostics' }
   )
 
@@ -347,18 +347,35 @@ do
     'n',
     '<leader>ds',
     ---@diagnostic disable-next-line: missing-fields
-    function() trouble.toggle { mode = 'symbols', win = { relative = 'win', position = 'left' } } end,
+    function() trouble.toggle({ mode = 'symbols', win = { relative = 'win', position = 'left' } }) end,
     { desc = 'Toggle [D]iagnostics' }
   )
 
-  ---@diagnostic disable-next-line: missing-parameter, missing-fields
-  vim.keymap.set('n', '<leader>dn', function() trouble.next { mode = 'open_buffers' } end, { desc = '[D]iagnostic [N]ext' })
-  ---@diagnostic disable-next-line: missing-parameter, missing-fields
-  vim.keymap.set('n', '<leader>dp', function() trouble.prev { mode = 'open_buffers' } end, { desc = '[D]iagnostic [P]revious' })
+  -- vim.keymap.set(
+  --   'n',
+  --   '<leader>dn',
+  --   ---@diagnostic disable-next-line: missing-parameter, missing-fields
+  --   function() trouble.next { mode = 'open_buffers', win = { relative = 'win', position = 'left' }, jump = true } end,
+  --   { desc = '[d]iagnostic [n]ext' }
+  -- )
+  -- vim.keymap.set(
+  --   'n',
+  --   '<leader>dp',
+  --   ---@diagnostic disable-next-line: missing-parameter, missing-fields
+  --   function() trouble.prev { mode = 'open_buffers', win = { relative = 'win', position = 'left' }, jump = true } end,
+  --   { desc = '[d]iagnostic [p]revious' }
+  -- )
 end
 -- ============================================================================
 -- Git Keymaps
 -- ============================================================================
 
----@diagnostic disable-next-line: deprecated
-vim.keymap.set('n', '<leader>td', function() require('gitsigns').toggle_deleted() end, { desc = 'Toggle [T]oggle [D]eleted' })
+do
+  local gitsigns = require('gitsigns')
+  ---@diagnostic disable-next-line: deprecated
+  vim.keymap.set('n', '<leader>td', function() gitsigns.toggle_deleted() end, { desc = 'Toggle [T]oggle [D]eleted' })
+  vim.keymap.set('n', '<leader>gq', function() gitsigns.setqflist('all') end, { desc = '[G]it [Q]uickfix list' })
+
+  vim.keymap.set('n', ']g', function() gitsigns.nav_hunk('next') end, { desc = 'Next Git change' })
+  vim.keymap.set('n', '[g', function() gitsigns.nav_hunk('prev') end, { desc = 'Previous Git change' })
+end

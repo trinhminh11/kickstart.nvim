@@ -1,10 +1,10 @@
 -- [[ Colorscheme ]]
 
-vim.pack.add {
+vim.pack.add({
   'https://github.com/khoido2003/classic_monokai.nvim',
-}
+})
 
-require('classic_monokai').setup {
+require('classic_monokai').setup({
   on_highlights = function(hl, c)
     -- Modules / namespaces -> function green
     hl['@module'] = { fg = c.green }
@@ -37,9 +37,9 @@ require('classic_monokai').setup {
       bg = '#505c78',
     }
   end,
-}
+})
 
-vim.cmd.colorscheme 'classic-monokai'
+vim.cmd.colorscheme('classic-monokai')
 
 vim.api.nvim_set_hl(0, 'NvimTreeGitFileDirtyHL', {
   fg = '#e0af68',

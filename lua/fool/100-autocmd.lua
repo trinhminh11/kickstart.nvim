@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
-vim.diagnostic.config {
+vim.diagnostic.config({
   update_in_insert = true,
 
   underline = true,
@@ -41,7 +41,7 @@ vim.diagnostic.config {
   },
 
   signs = true,
-}
+})
 
 -- add <leader>m <leader>M to jump to next/previous markdown heading
 vim.api.nvim_create_autocmd('FileType', {
@@ -110,6 +110,7 @@ vim.api.nvim_create_autocmd({
   'InsertLeave',
   'BufLeave',
   'FocusLost',
+  'TextChanged',
 }, {
   pattern = {
     '*.py',
@@ -127,7 +128,7 @@ vim.api.nvim_create_autocmd({
     '*.lua',
   },
   callback = function()
-    if vim.bo.modified and vim.fn.expand '%' ~= '' and vim.bo.buftype == '' then vim.cmd 'silent write' end
+    if vim.bo.modified and vim.fn.expand('%') ~= '' and vim.bo.buftype == '' then vim.cmd('silent write') end
   end,
 })
 

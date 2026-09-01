@@ -34,7 +34,7 @@ vim.opt.fillchars = { eob = ' ' }
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
+vim.opt.undodir = os.getenv('HOME') .. '/.vim/undodir'
 vim.opt.undofile = true
 vim.opt.updatetime = 300
 vim.opt.autoread = true
@@ -44,8 +44,8 @@ vim.opt.hidden = true
 vim.opt.errorbells = false
 vim.opt.backspace = 'indent,eol,start'
 vim.opt.autochdir = false
-vim.opt.iskeyword:append '-'
-vim.opt.path:append '**'
+vim.opt.iskeyword:append('-')
+vim.opt.path:append('**')
 vim.opt.selection = 'inclusive'
 vim.opt.mouse = 'a'
 vim.opt.modifiable = true
@@ -69,13 +69,13 @@ vim.opt.splitbelow = true
 
 vim.opt.wildmenu = true
 vim.opt.wildmode = 'longest:full,full'
-vim.opt.diffopt:append 'linematch:60'
+vim.opt.diffopt:append('linematch:60')
 vim.opt.redrawtime = 10000
 vim.opt.maxmempattern = 20000
 
 vim.opt.termguicolors = true
 
-vim.opt.isfname:append '@-@'
+vim.opt.isfname:append('@-@')
 
 -- Always write exactly one newline at EOF
 vim.opt.endofline = true

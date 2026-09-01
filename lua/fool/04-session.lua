@@ -1,4 +1,4 @@
-local session_dir = vim.fn.stdpath 'data' .. '/sessions'
+local session_dir = vim.fn.stdpath('data') .. '/sessions'
 local current_session = nil
 
 vim.fn.mkdir(session_dir, 'p')
@@ -48,11 +48,11 @@ local function load_session()
         '*.vim',
       }, {}),
 
-      sorter = require('telescope.config').values.file_sorter {},
+      sorter = require('telescope.config').values.file_sorter({}),
 
       attach_mappings = function(prompt_bufnr, map)
-        local actions = require 'telescope.actions'
-        local action_state = require 'telescope.actions.state'
+        local actions = require('telescope.actions')
+        local action_state = require('telescope.actions.state')
 
         -- Enter = load session
         actions.select_default:replace(function()
