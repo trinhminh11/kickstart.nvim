@@ -10,6 +10,7 @@ vim.pack.add({
   'https://github.com/mrjones2014/smart-splits.nvim', -- smart splits to split between tmux and nvim
   'https://github.com/laytan/cloak.nvim', -- cloak to hide sensitive information
   'https://github.com/folke/trouble.nvim', -- quickfix list replacement
+  "https://github.com/HiPhish/rainbow-delimiters.nvim", -- rainbow delimiters for better readability
 })
 
 -- ============================================================================

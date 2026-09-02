@@ -1,7 +1,7 @@
 -- [[ Colorscheme ]]
 
 vim.pack.add({
-  'https://github.com/khoido2003/classic_monokai.nvim',
+  'https://github.com/trinhminh11/classic_monokai.nvim',
 })
 
 require('classic_monokai').setup({
@@ -21,9 +21,6 @@ require('classic_monokai').setup({
     -- Python `class` / definition keywords
     hl['@keyword.type.python'] = { fg = c.blue }
 
-    -- Python dunder methods: __init__, __str__, __repr__, ...
-    hl['@function.dunder'] = { fg = c.blue }
-
     -- LSP semantic tokens
     -- Prevent LSP from changing classes/modules back to blue
     hl['@lsp.type.class'] = { fg = c.green }
@@ -36,10 +33,30 @@ require('classic_monokai').setup({
     hl.Search = {
       bg = '#505c78',
     }
+
+    -- Custom highlight groups for Python
+    -- Python dunder methods: __init__, __str__, __repr__, ...
+    hl['@function.dunder'] = { fg = c.blue }
+
+    -- Python string-prefix: r"", u"", b"", f"", fr"", rf"", ...
+    hl['@string.prefix.python'] = { fg = c.blue }
   end,
 })
 
 vim.cmd.colorscheme('classic-monokai')
+
+vim.api.nvim_set_hl(0, 'RainbowDelimiterYellow', { fg = '#f0d264' })
+vim.api.nvim_set_hl(0, 'RainbowDelimiterRed', { fg = '#f858a2' })
+vim.api.nvim_set_hl(0, 'RainbowDelimiterBlue', { fg = '#66d9ef' })
+
+-- Rainbow Delimiters
+require('rainbow-delimiters.setup').setup({
+  highlight = {
+    'RainbowDelimiterYellow',
+    'RainbowDelimiterRed',
+    'RainbowDelimiterBlue',
+  },
+})
 
 vim.api.nvim_set_hl(0, 'NvimTreeGitFileDirtyHL', {
   fg = '#e0af68',

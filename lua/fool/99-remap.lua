@@ -32,10 +32,11 @@ do
       vim.cmd('normal! ' .. count .. 'j')
     end
   end, { silent = true })
+
   -- better p
   -- p and P only paste from system clipboard register, not from default register
-  vim.keymap.set('n', 'p', '"+p', { remap = false })
-  vim.keymap.set('n', 'P', '"+P', { remap = false })
+  vim.keymap.set({ 'n', 'v' }, 'p', '"+p', { remap = false })
+  vim.keymap.set({ 'n', 'v' }, 'P', '"+P', { remap = false })
 
   -- Normal mode
   vim.keymap.set('n', 'dx', '"+dd', { remap = false }) -- delete line + copy it

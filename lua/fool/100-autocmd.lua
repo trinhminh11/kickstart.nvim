@@ -142,3 +142,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     if (event.operator == 'y' and event.regname == '') or event.regname == '0' then vim.fn.setreg('+', event.regcontents, event.regtype) end
   end,
 })
+
+-- AUTO READ file if changed outside of vim (codex, git, etc.)
+vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHoldI' }, {
+  pattern = '*',
+  callback = function()
+    if vim.bo.buftype ~= 'nofile' then vim.cmd('silent! checktime') end
+  end,
+})
