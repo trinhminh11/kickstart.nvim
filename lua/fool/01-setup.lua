@@ -10,12 +10,25 @@ vim.pack.add({
   'https://github.com/mrjones2014/smart-splits.nvim', -- smart splits to split between tmux and nvim
   'https://github.com/laytan/cloak.nvim', -- cloak to hide sensitive information
   'https://github.com/folke/trouble.nvim', -- quickfix list replacement
-  "https://github.com/HiPhish/rainbow-delimiters.nvim", -- rainbow delimiters for better readability
+  'https://github.com/HiPhish/rainbow-delimiters.nvim', -- rainbow delimiters for better readability
+  'https://github.com/norcalli/nvim-colorizer.lua', -- colorizer for hex colors
 })
 
 -- ============================================================================
 -- Basic setup
 -- ============================================================================
+
+-- Nvim Colorizer
+require('colorizer').setup({ '*' }, {
+  RGB = false, -- #RGB hex codes
+  RRGGBB = true, -- #RRGGBB hex codes
+  names = false, -- "Name" codes like Blue or blue
+  RRGGBBAA = true, -- #RRGGBBAA hex codes
+  rgb_fn = true, -- CSS rgb() and rgba() functions
+  hsl_fn = true, -- CSS hsl() and hsla() functions
+  css = true, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+  css_fn = true, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+})
 
 -- Cloak:
 -- Plugin that allows you to hide sensitive information in your code, such as API keys or passwords

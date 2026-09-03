@@ -1,0 +1,12 @@
+{
+    "dependencies": {
+        "undotree": {
+            "rev": "02b69aed427b848c4dca483fc5e9524b6019c296",
+            "src": "https://github.com/jiaoshijie/undotree"
+        },
+        "copilot.vim": {
+            "rev": "a12fd5672110c8aa7e3c8419e28c96943ca179be",
+            "src": "https://github.com/github/copilot.vim.git"
+        }
+    }
+}

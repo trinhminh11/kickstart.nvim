@@ -269,31 +269,40 @@ do
 end
 
 -- Bufferline Next/Prev
-vim.keymap.set('n', '<TAB>', function() vim.cmd('BufferLineCycleNext') end, {
-  desc = 'Next buffer/terminal',
-})
+do
+  vim.keymap.set('n', '<TAB>', function() vim.cmd('BufferLineCycleNext') end, {
+    desc = 'Next buffer',
+  })
 
-vim.keymap.set('n', '<S-TAB>', function() vim.cmd('BufferLineCyclePrev') end, {
-  desc = 'Previous buffer/terminal',
-})
+  vim.keymap.set('n', '<S-TAB>', function() vim.cmd('BufferLineCyclePrev') end, {
+    desc = 'Previous buffer',
+  })
 
-vim.keymap.set('n', '<C-w>', function()
-  local current = vim.api.nvim_get_current_buf()
+  vim.keymap.set('n', '<C-w>', function()
+    local current = vim.api.nvim_get_current_buf()
 
-  vim.cmd('BufferLineMovePrev')
+    vim.cmd('BufferLineMovePrev')
 
-  -- if new_current is current -> vim.cmd 'BufferLineCycleNext' to move to next buffer
-  if vim.api.nvim_get_current_buf() == current then vim.cmd('BufferLineCycleNext') end
+    -- if new_current is current -> vim.cmd 'BufferLineCycleNext' to move to next buffer
+    if vim.api.nvim_get_current_buf() == current then vim.cmd('BufferLineCycleNext') end
 
-  if vim.api.nvim_get_current_buf() ~= current then
-    vim.api.nvim_buf_delete(current, {})
-  else
-    -- case where we have only one buffer left, we can't delete it, so add signal to user that we can't delete it
-    vim.notify('Cannot delete the last buffer', vim.log.levels.WARN)
-  end
-end, {
-  desc = 'Close buffer/terminal',
-})
+    if vim.api.nvim_get_current_buf() ~= current then
+      vim.api.nvim_buf_delete(current, {})
+    else
+      -- case where we have only one buffer left, we can't delete it, so add signal to user that we can't delete it
+      vim.notify('Cannot delete the last buffer', vim.log.levels.WARN)
+    end
+  end, {
+    desc = 'Close buffer',
+  })
+
+  vim.keymap.set('n', '<C-Left>', function() vim.cmd('BufferLineMovePrev') end, {
+    desc = 'Move buffer left',
+  })
+  vim.keymap.set('n', '<C-Right>', function() vim.cmd('BufferLineMoveNext') end, {
+    desc = 'Move buffer right',
+  })
+end
 
 -- Cycle windows
 vim.keymap.set({ 'n', 'v' }, '<leader><Tab>', '<C-w>w', {
@@ -353,18 +362,18 @@ do
   )
 
   -- vim.keymap.set(
-  --   'n',
-  --   '<leader>dn',
-  --   ---@diagnostic disable-next-line: missing-parameter, missing-fields
-  --   function() trouble.next { mode = 'open_buffers', win = { relative = 'win', position = 'left' }, jump = true } end,
-  --   { desc = '[d]iagnostic [n]ext' }
+  --     'n',
+  --     '<leader>dn',
+  --     ---@diagnostic disable-next-line: missing-parameter, missing-fields
+  --     function() trouble.next { mode = 'open_buffers', win = { relative = 'win', position = 'left' }, jump = true } end,
+  --     { desc = '[d]iagnostic [n]ext' }
   -- )
   -- vim.keymap.set(
-  --   'n',
-  --   '<leader>dp',
-  --   ---@diagnostic disable-next-line: missing-parameter, missing-fields
-  --   function() trouble.prev { mode = 'open_buffers', win = { relative = 'win', position = 'left' }, jump = true } end,
-  --   { desc = '[d]iagnostic [p]revious' }
+  --     'n',
+  --     '<leader>dp',
+  --     ---@diagnostic disable-next-line: missing-parameter, missing-fields
+  --     function() trouble.prev { mode = 'open_buffers', win = { relative = 'win', position = 'left' }, jump = true } end,
+  --     { desc = '[d]iagnostic [p]revious' }
   -- )
 end
 -- ============================================================================

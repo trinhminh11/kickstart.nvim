@@ -126,6 +126,8 @@ vim.api.nvim_create_autocmd({
     '*.rs',
     '*.md',
     '*.lua',
+    '*.sh',
+    '*.json',
   },
   callback = function()
     if vim.bo.modified and vim.fn.expand('%') ~= '' and vim.bo.buftype == '' then vim.cmd('silent write') end

@@ -2,11 +2,22 @@
 set -euo pipefail
 
 nvim_git_dir="$HOME/.config/nvim/pack/github/start"
+dependencies_file="./dependencies.json"
 
 mkdir -p "$nvim_git_dir"
-
 cd "$nvim_git_dir"
-./clone.sh "jiaoshijie/undotree" "02b69aed427b848c4dca483fc5e9524b6019c296"
-./clone.sh "github/copilot.vim.git" "a12fd5672110c8aa7e3c8419e28c96943ca179be"
 
-unset nvim_git_dir
+jq -r '
+    .dependencies
+    | to_entries[]
+    | [.key, .value.src, .value.rev]
+    | @tsv
+' "$dependencies_file" |
+while IFS=$'\t' read -r name src rev; do
+    if [[ -e "$name" ]]; then
+        echo "exists, skipping: $name"
+        continue
+    fi
+
+    ./clone.sh "$src" "$rev"
+done
