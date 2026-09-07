@@ -10,12 +10,17 @@ cd "$nvim_git_dir"
 jq -r '
     .dependencies
     | to_entries[]
-    | [.key, .value.src, .value.rev]
+    | [.key, .value.src, .value.rev, .value.disable]
     | @tsv
 ' "$dependencies_file" |
-while IFS=$'\t' read -r name src rev; do
+while IFS=$'\t' read -r name src rev disable; do
     if [[ -e "$name" ]]; then
         echo "exists, skipping: $name"
+        continue
+    fi
+
+    if [[ "$disable" == "true" ]]; then
+        echo "disabled, skipping: $name"
         continue
     fi
 

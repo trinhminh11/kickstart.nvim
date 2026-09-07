@@ -3,7 +3,6 @@ vim.pack.add({
   'https://github.com/akinsho/bufferline.nvim', -- for buffer line
   'https://github.com/nvim-tree/nvim-tree.lua', -- file explorer
   'https://github.com/nvim-lualine/lualine.nvim', -- status line
-  'https://github.com/github/copilot.vim', -- github copilot
   'https://github.com/MeanderingProgrammer/render-markdown.nvim', -- markdown preview
   'https://github.com/lervag/vimtex', -- latex support
   'https://github.com/nvim-treesitter/nvim-treesitter-textobjects', -- treesitter textobjects
@@ -177,6 +176,9 @@ do
 
     ruff = {},
 
+    -- rust
+    rust_analyzer = {},
+
     --other languages
     jsonls = {},
     markdown_oxide = {},
@@ -215,6 +217,7 @@ do
     format_on_save = function(bufnr)
       -- You can specify filetypes to autoformat on save here:
       local enabled_filetypes = {
+        rust = true,
         lua = true,
         python = true,
         markdown = true,
@@ -252,6 +255,7 @@ do
       python = { 'ruff_organize_imports', 'ruff_format' },
       bib = { 'bibtex_tidy' },
       bibtex = { 'bibtex_tidy' },
+      rust = { 'rustfmt' },
       -- You can use 'stop_after_first' to run the first available formatter from the list
       -- javascript = { "prettierd", "prettier", stop_after_first = true },
     },
