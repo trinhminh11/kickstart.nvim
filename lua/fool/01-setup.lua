@@ -253,8 +253,8 @@ do
       -- Conform can also run multiple formatters sequentially
       lua = { 'stylua' },
       python = { 'ruff_organize_imports', 'ruff_format' },
-      bib = { 'bibtex_tidy' },
-      bibtex = { 'bibtex_tidy' },
+      bib = { 'bibtex-tidy' },
+      bibtex = { 'bibtex-tidy' },
       rust = { 'rustfmt' },
       -- You can use 'stop_after_first' to run the first available formatter from the list
       -- javascript = { "prettierd", "prettier", stop_after_first = true },
